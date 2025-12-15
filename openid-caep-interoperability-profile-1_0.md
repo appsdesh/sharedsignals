@@ -131,6 +131,10 @@ Credential Change
 : A SSF Transmitter or Receiver is able to respectively generate or respond to
 the CAEP credential-change event
 
+Device Compliance Change
+: A SSF Transmitter or Receiver is able to respectively generate or respond to
+the CAEP device-compliance-change event
+
 ## Notational Conventions
 
 The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL
@@ -298,8 +302,9 @@ token. For example, a short lived access token could be defined as one in which
 the value of the `exp` claim is not longer than 60 mins after `nbf` claim.
 Please refer to Access token lifetimes in the security considerations of {{FAPI}}
 for additional considerations.
-  * client credential grant flow {{RFC6749}} section 4.4
-  * authorization code flow {{RFC6749}} section 4.1
+
+* client credential grant flow {{RFC6749}} section 4.4
+* authorization code flow {{RFC6749}} section 4.1
 
 ### OAuth Scopes
 
@@ -369,6 +374,21 @@ field values:
 generate any allowable value of this field
 
 `credential_type`
+: Receivers MUST interpret all allowable values of this field. Transmitters MAY
+generate any allowable value of this field
+
+`reason_admin`
+: Transmitters MUST populate this value with a non-empty string
+
+## Device Compliance Change
+
+In order to support notifying and responding to changes in device compliance status, implementations MUST support the event type `device-compliance-change`. This event is used to signal that a device's adherence to a set of security or organizational compliance policies has changed. implementations MUST support the following field values:
+
+`previous_status`
+: Receivers MUST interpret all allowable values of this field. Transmitters MAY
+generate any allowable value of this field
+
+`current_status`
 : Receivers MUST interpret all allowable values of this field. Transmitters MAY
 generate any allowable value of this field
 
